@@ -1,0 +1,54 @@
+<div class="table-content">
+  <table>
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employeeList">
+        <td><img [src]="employee.avatar" width="42" height="42" alt="Profile"></td>
+        <td>{{employee.first_name}}</td>
+        <td>{{employee.last_name}}</td>
+        <td>{{employee.email}}</td>
+        <td>
+          <button class="send-email" (click)="redirectToMail(employee.email)">
+            <svg viewBox="0 0 24 24" xml:space="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+              style="width:19.46px;height:16.97px;vertical-align:middle"
+              enable-background="new 0 0 24 24"><path
+                d="m21.5 11.1-17.9-9c-.9-.4-1.9.4-1.5 1.3l2.5 6.7L16 12 4.6 13.9l-2.5 6.7c-.3.9.6 1.7 1.5 1.2l17.9-9c.7-.3.7-1.3 0-1.7z"
+                fill="#ffffff" class="fill-000000"></path></svg>
+            Send Email</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer">
+    <span class="total-count">{{page}} - {{total_pages}} of {{total}} items</span>
+    <div class="pagination">
+      <button class="previous" [disabled]="page === 1" (click)="goToPage((page-1) === 0 ? 1 : page-1)">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path
+            d="m11 16 9-9M20 25l-9-9" style="width:7.01px;height:12px"
+            fill="none" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="2px" class="stroke-000000"></path></svg>
+      </button>
+      <div class="page_numbers">
+        <span
+          class="page"
+          [class.active]="pageNumber === page"
+          *ngFor="let pageNumber of getPages()"
+          (click)="goToPage(pageNumber)">{{pageNumber}}</span>
+      </div>
+      <button class="next" [disabled]="page === total_pages" (click)="goToPage((page+1) === 1 ? 1 : page+1)">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path
+            d="M12 25a1 1 0 0 1-.71-.29 1 1 0 0 1 0-1.42l7.3-7.29-7.3-7.29a1 1 0 1 1 1.42-1.42l8 8a1 1 0 0 1 0 1.42l-8 8A1 1 0 0 1 12 25Z"
+            style="width:7.01px;height:12px" data-name="Layer 2"
+            class="fill-000000"></path><path d="M0 0h32v32H0z" fill="none"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
