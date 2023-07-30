@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,11 +13,15 @@ export interface Employee {
 @Injectable({
   providedIn: 'root'
 })
-export class EmpolyeesService {
+export class EmpolyeeService {
 
   constructor(private http: HttpClient) { }
 
-  public getUserFromApi(pageNumber: number) {
+  public getEmployees(pageNumber: number) {
     return this.http.get<any>('https://reqres.in/api/users?page='+pageNumber);
+  }
+
+  public getEmployeeById(empId: number) {
+    return this.http.get<any>('https://reqres.in/api/users/'+empId);
   }
 }

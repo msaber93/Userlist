@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { TableComponent } from './table/table.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DetailsComponent } from './detailes/detailes.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    TableComponent
+    TableComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

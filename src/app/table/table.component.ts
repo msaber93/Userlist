@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Employee, EmpolyeesService } from '../services/empolyees.service';
+import { Employee, EmpolyeeService } from '../services/empolyee.service';
 import { OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -14,24 +15,24 @@ export class TableComponent implements OnInit {
   public per_page = 6;
   public total_pages = 1;
 
-  constructor(private userServices: EmpolyeesService) {}
+  constructor(public userServices: EmpolyeeService,
+    private router: Router) {}
 
   ngOnInit(): void {
-    this.getUser();
+    this.getUsers();
   }
 
   redirectToMail(email: string) {
     window.location.href = 'mailto:' + email;
   }
 
-  getUser() {
-    this.userServices.getUserFromApi(this.page).subscribe((result) => {
+  getUsers() {
+    this.userServices.getEmployees(this.page).subscribe((result) => {
       this.employeeList = result.data;
       this.total = result.total;
       this.page = result.page;
       this.total_pages = result.total_pages;
       this.per_page = result.per_page;
-      console.log(result);
     });
   }
 
@@ -43,6 +44,10 @@ export class TableComponent implements OnInit {
     console.log(page, 'running');
 
     this.page = page;
-    this.getUser();
+    this.getUsers();
+  }
+
+  pageOfDetails(id : number) {
+    this.router.navigate(['/details/'+id]);
   }
 }
